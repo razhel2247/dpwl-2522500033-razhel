@@ -84,7 +84,8 @@ Browser → index.php → Router → Controller → Model → basis data/data �
 Dalam arsitektur MVC Model bertugas menangani logika bisnis data, manipulasi data, dan kueri ke basis data. Controller kemudian memanggil Model untuk mengambil atau menyimpan data sebelum meneruskan ke View. Model belum digunakan karena pengelolaan basis data baru mulai dipelajari pada P3
 
 ## 7. Hasil Pengujian dan Debugging 
-
+Gambar 1. Hasil Pengujian dan debugging
+![Gambar 1 - Custom Route](dokumentasi/latihan.jpg)
 
 ## 8. Bukti Tangkapan Layar
 Sisipkan gambar yang relevan dari folder dokumentasi/ dengan perintah:

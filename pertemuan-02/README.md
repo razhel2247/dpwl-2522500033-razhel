@@ -50,7 +50,6 @@ seperti config.php pengaturan URL dasar dan routes.php aturan pemetaan rute
 Front controller adalah satu titik masuk utama untuk request yang ditujukan ke route atau fitur dinamis aplikasi. peran ini dijalankan oleh berkas index.php yang berada pada root proyek. Request terhadap route aplikasi terlebih dahulu melewati index.php, sedangkan request terhadap berkas statis seperti CSS pada folder assets/ dapat diakses langsung dan tidak dipetakan oleh Router. Front controller bertugas menyiapkan kebutuhan awal aplikasi, seperti path, konfigurasi, Helper, class inti, dan routes, kemudian menyerahkan URI kepada Router untuk menentukan Controller yang harus dijalankan
 
 ## 4. Routing dan Pemetaan URL
-## 4. Routing dan Pemetaan URL
 | URL/Route | Controller | Method | Parameter | View |
 |---|---|---|---|---|
 | / | Home | index | - | home/index.php |

@@ -50,14 +50,27 @@ seperti config.php pengaturan URL dasar dan routes.php aturan pemetaan rute
 Front controller adalah satu titik masuk utama untuk request yang ditujukan ke route atau fitur dinamis aplikasi. peran ini dijalankan oleh berkas index.php yang berada pada root proyek. Request terhadap route aplikasi terlebih dahulu melewati index.php, sedangkan request terhadap berkas statis seperti CSS pada folder assets/ dapat diakses langsung dan tidak dipetakan oleh Router. Front controller bertugas menyiapkan kebutuhan awal aplikasi, seperti path, konfigurasi, Helper, class inti, dan routes, kemudian menyerahkan URI kepada Router untuk menentukan Controller yang harus dijalankan
 
 ## 4. Routing dan Pemetaan URL
-| URL/Route | Controller | Method | Parameter | View |
-|---|---|---|---|---|
-| / | Home | index | - | home/index.php |
-| home/index | Home | index | - | home/index.php |
-| home/info/mvc | Home | info | mvc | home/info.php |
-| info/routing | Home | info | routing | home/info.php |
-Tambahkan satu baris untuk route hasil Tahap Modifikasi ATM yang dibuat berdasarkan objek atau konteks
-aplikasi DPW, kemudian jelaskan pemetaan route → Controller → method → parameter → View.
+URL/Route,Controller,Method,Parameter,View
+/,Home,index,-,home/index.php
+home/index,Home,index,-,home/index.php
+home/info/mvc,Home,info,mvc,home/info.php
+info/routing,Home,info,routing,home/info.php
+home/info/ci3,Home,info,ci3,home/info.php
+
+-Route (home/info/ci3):
+Pengguna mengakses URL http://localhost/dpwl-2522500033/home/info/ci3 pada browser. File index.php dan system/core/Router.php memecah segmen URL tersebut.
+
+-Controller (Home):
+Segmen pertama (home) mengarahkan request ke kelas controller Home.php yang berada di folder application/controllers/ Home.php.
+
+-Method (info):
+Segmen kedua (info) memanggil fungsi/method info() di dalam kelas Home.
+
+-Parameter (ci3):
+Segmen ketiga (ci3) dikirim sebagai argumen parameter variabel (misal $materi = 'ci3') ke dalam method info($materi).
+
+-View (home/info.php):
+Method info() mengolah variabel 'ci3' (misal untuk menampilkan materi Framework CodeIgniter 3) lalu merender halaman tampilan yang tersimpan di application/views/home/info.php.
 
 ## 5. Base URL dan Helper
 Jelaskan fungsi base_url() dan site_url(), kemudian berikan contoh penggunaannya pada implementasi P2:
@@ -85,7 +98,7 @@ Dalam arsitektur MVC Model bertugas menangani logika bisnis data, manipulasi dat
 
 ## 7. Hasil Pengujian dan Debugging 
 Gambar 1. Hasil Pengujian dan debugging
-![Gambar 1 - Custom Route](dokumentasi/latihan.jpg)
+![Gambar 1 -debugging](dokumentasi/latihan.jpg)
 
 ## 8. Bukti Tangkapan Layar
 Sisipkan gambar yang relevan dari folder dokumentasi/ dengan perintah:

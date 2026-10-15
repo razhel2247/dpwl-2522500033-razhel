@@ -1,3 +1,4 @@
 # pertemuan-04
-[Gambar 1 - Dashboard ](dokumentasi/Dashboard.png)
-![Gambar 1 - Manajemenadmin ](dokumentasi/Manajemenadmin.png)
+
+[Gambar 1 - dashboard ](dokumentasi/dashboard.png)
+![Gambar 1 - manajemen ](dokumentasi/manajemen.png)

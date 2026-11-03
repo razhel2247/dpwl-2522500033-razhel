@@ -1,9 +1,9 @@
 # pertemuan-07
 ## DOKUMENTASI HASIL PENGUJIAN
 1. Hasil Pengujian 1
-![Hasil Pengujian 1](dokumentasi/hasilpengujian1.png)
+![Hasil Pengujian 1](dokumentasi/HasilPengujian1.png)
 2. Hasil Pengujiann 2
-![Hasil pengujian 2](dokumentasi/hasilpengujian2.png)
+![Hasil pengujian 2](dokumentasi/HasilPengujian2.png)
 3. Hasil Pengujian 3
 ![Hasil Pengujian 3](dokumentasi/ChekoutBerhasil.png)
 4. Hasil Pengujian 4

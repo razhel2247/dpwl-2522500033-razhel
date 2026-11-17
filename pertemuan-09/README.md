@@ -39,3 +39,18 @@ saya menutup akses langsung ke bukti pembayaran dengan membuat uploads\bayar\.ht
  * Alur Penyewa Menguji tampilan rincian DP setelah checkout, unggah bukti transfer yang valid (status tetap pending), serta penolakan otomatis terhadap unggahan yang kosong, melebihi batas ukuran, atau berformat tidak sah
  * Alur Admin Memastikan daftar pembayaran masuk dan bukti transfer dapat diperiksa, perubahan status pada tabel t_bayar dan t_sewa akurat saat diterima atau ditolak, serta mencegah verifikasi tanpa bukti maupun verifikasi ulang 
  * Keamanan Hak Akses & Log Perbaikan Menguji pemblokiran pengguna yang belum login, pencegahan akses lintas akun penyewa, pembatasan menu admin, serta menyediakan tabel pencatatan temuan dan perbaikan selama pengujian
+
+ 7. Tangkapan Layar
+
+1. Hasil Pengujian 1
+   ![Hasil Pengujian 1](dokumentasi/HasilPengujian1.png)
+2. Hasil Pengujiann 2
+   ![Hasil pengujian 2](dokumentasi/HasilPengujian2.png)
+3. Hasil Pengujian 3
+   ![Hasil Pengujian 3](dokumentasi/HasilPengujian3.png)
+4. Hasil Pengujian 4
+   ![Hasil Pengujian 4](dokumentasi/HasilPengujian4.png)
+5. Hasil Pengujian 5
+   ![Hasil Pengujian 5](dokumentasi/HasilPengujian5.png)
+
+---

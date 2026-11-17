@@ -73,3 +73,17 @@ Contoh record DP hasil checkout (P7):
 - Proses pembayaran memperbarui record DP yang sudah dibuat saat checkout, bukan membuat record DP baru.
 
 ---
+4. Route Baru
+
+Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyyymmdd/nn` (mengandung `/`), sehingga dikirim lewat _query string_, mengikuti pola `transaksi/keranjang?kode_sewa=...`.
+
+| Method | URL                                      | Controller::method                  | Akses   |
+| ------ | ---------------------------------------- | ----------------------------------- | ------- |
+| GET    | `/pembayaran`                            | `Pembayaran_controller::index`      | Penyewa |
+| GET    | `/pembayaran/detail?kode_sewa=...`       | `Pembayaran_controller::detail`     | Penyewa |
+| POST   | `/pembayaran/unggah`                     | `Pembayaran_controller::unggah`     | Penyewa |
+| GET    | `/admin/pembayaran`                      | `Verifikasi_controller::index`      | Admin   |
+| GET    | `/admin/pembayaran/detail?kode_sewa=...` | `Verifikasi_controller::detail`     | Admin   |
+| POST   | `/admin/pembayaran/verifikasi`           | `Verifikasi_controller::verifikasi` | Admin   |
+
+---

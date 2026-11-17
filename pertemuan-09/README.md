@@ -132,3 +132,46 @@ Validasi dilakukan berlapis pada `Pembayaran_controller::simpanBerkas()`:
 Keamanan lain: _prepared statement_ untuk seluruh query berparameter, pembatasan method HTTP (405), `htmlspecialchars` pada output view, dan Post-Redirect-Get pada semua pengiriman formulir.
 
 ---
+7. Cara Menjalankan
+
+ Prasyarat
+
+- Laragon (Apache + MySQL) dan PHP 8.4 aktif.
+- Ekstensi PHP `mysqli` dan `fileinfo` aktif.
+- `mod_rewrite` Apache aktif.
+
+ Langkah
+
+1. Salin folder aplikasi ke `C:\laragon\www\dpwl-2522500033\`.
+2. Buat atau impor database, lalu sesuaikan `application/config/database.php`:
+   ```php
+   $db = new mysqli('localhost', 'root', '', 'NAMA_DATABASE_ANDA', 3306);
+   ```
+   > Pada berkas bawaan nama database masih `db_dpwl_nama123`. Ganti sesuai database Anda.
+3. Pastikan `base_url` pada `application/config/config.php` sesuai:
+   ```php
+   $config['base_url'] = 'http://localhost/dpwl-2522500033/';
+   ```
+   dan `RewriteBase` pada `.htaccess` adalah `/dpwl-2522500033/`.
+4. Pastikan folder `uploads/bayar/` ada dan dapat ditulis (dibuat otomatis jika belum ada).
+5. Buka `http://localhost/dpwl-2522500033/`.
+
+Prasyarat Database
+
+Kolom berikut harus dapat menyimpan nilai baru P9. Jika berupa `ENUM`, pastikan definisinya memuat nilainya:
+
+| Kolom                | Nilai yang diperlukan                           |
+| -------------------- | ----------------------------------------------- |
+| `t_bayar.sttus_byr`  | `pending`, `valid`, `invalid`                   |
+| `t_sewa.status_sewa` | `keranjang`, `diajukan`, `disetujui`, `ditolak` |
+
+Model memiliki pengaman: jika nilai hasil verifikasi tidak tersimpan sesuai (misalnya ENUM belum memuat nilai baru), transaksi database dibatalkan (_rollback_).
+
+ Alur Uji Singkat
+
+1. Login sebagai penyewa → pilih kendaraan → keranjang → **checkout**.
+2. Sistem membuka halaman pembayaran DP → unggah bukti transfer.
+3. Login sebagai admin → menu **Pembayaran** → buka detail → **Terima** atau **Tolak**.
+4. Periksa `t_bayar` dan `t_sewa` pada database.
+
+---

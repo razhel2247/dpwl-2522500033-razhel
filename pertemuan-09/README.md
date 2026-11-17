@@ -14,8 +14,13 @@ saya membuat token CSRF dengan membuat application\helpers\csrf_helper.php
 menambahkann 6 baris route baru pertemuan-09\application\config\routes.php
 saya menutup akses langsung ke bukti pembayaran dengan membuat uploads\bayar\.htaccess
 
-2. Fitur yang Ditambahka
+2. Fitur yang Ditambahkan
 * Sisi Penyewa: Penyewa dapat melihat daftar serta rincian tagihan DP, lalu mengunggah bukti transfer (dengan validasi berkas ketat) ke direktori uploads/bayar yang memperbarui data gambar (ft_byr) dan waktu bayar (tgl_wkt_byr), sementara status tetap pending.
 * Sisi Admin: Admin memiliki menu Pembayaran baru untuk memeriksa rincian transaksi beserta foto bukti transfer yang diunggah penyewa, lalu menentukan keputusan melalui tombol Terima atau Tolak
 * Perubahan Status: Keputusan verifikasi dijalankan dalam satu transaksi database dengan mencatat waktu verifikasi (tgl_wkt_ver). Jika diterima, status pembayaran menjadi valid dan sewa disetujui; jika ditolak, status pembayaran menjadi invalid dan sewa ditolak
+
+3. Aturan Bisnis yang Diterapkan
+* Otentikasi & Otorisasi Ketat: Semua pengguna wajib login, peran penyewa dan admin dipisahkan secara tegas (akses tidak sah ditolak dengan kode 403), serta penyewa hanya bisa mengakses tagihannya sendiri tanpa membocorkan keberadaan data milik orang lain.
+* Keamanan & Integritas Data: Nominal pembayaran mutlak diambil dari database (bukan input form), dan proses pembayaran hanya memperbarui record DP yang sudah ada saat checkout (tidak membuat data baru)
+* Kontrol Alur Unggah & Verifikasi: Bukti transfer wajib ada sebelum diverifikasi admin. Selama status masih pending, penyewa boleh mengunggah ulang bukti (file lama dihapus otomatis setelah database terbarukan), namun jika status sudah final (valid/invalid), data terkunci dan tidak bisa diubah lagi
 

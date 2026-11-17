@@ -29,3 +29,8 @@ saya menutup akses langsung ke bukti pembayaran dengan membuat uploads\bayar\.ht
 
  * Akses Penyewa (Pembayaran_controller): Menyediakan route untuk melihat daftar tagihan (/pembayaran), melihat rincian (/pembayaran/detail), dan mengirim bukti transfer (/pembayaran/unggah)
  * Akses Admin (Verifikasi_controller): Menyediakan route khusus admin untuk memantau daftar pembayaran masuk (/admin/pembayaran), memeriksa rincian bukti (/admin/pembayaran/detail), dan memproses keputusan verifikasi (/admin/pembayaran/verifikasi)
+
+ 5. Pembagian MVC
+ * Model (Pembayaran_model.php): Mengelola query data pembayaran dan relasinya menggunakan prepared statement, serta menjaga integritas proses verifikasi lewat transaksi database dan SELECT ... FOR UPDATE
+ * Controller (Pembayaran_controller & Verifikasi_controller): Memisahkan alur logika bisnis penyewa (validasi unggahan, cek kepemilikan, pola PRG) dengan alur admin (autentikasi admin dan eksekusi keputusan verifikasi)
+ * View & Integrasi Berkas: Menambahkan 4 halaman tampilan baru (daftar dan detail untuk masing-masing peran), memperbarui berkas navigasi (navbar.php, sidebar.php), rute (routes.php), alur redirect setelah checkout (Transaksi_controller.php), serta menyiapkan direktori penyimpanan uploads/bayar/.

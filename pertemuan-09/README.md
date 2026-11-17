@@ -1,44 +1,26 @@
 # pertemuan-09
-
-# Praktikum Mandiri P9 — Transaksi MVC II: Pembayaran Awal dan Verifikasi Pembayaran
-
-Sistem Informasi Penyewaan Kendaraan — PHP 8.4 tanpa framework, pendekatan _homemade MVC_, MySQLi + _prepared statement_.
-
-|                    |                                                                      |
-| ------------------ | -------------------------------------------------------------------- |
-| Mata kuliah        | Dasar Pemrograman Web Lanjut (DPWL)                                  |
-| NIM                | 2522500033                                                           |
-| Folder aplikasi    | `dpwl-2522500033`                                                    |
-| Folder arsip       | `pertemuan-09`                                                       |
-| Dasar pengembangan | Aplikasi P7 (keranjang + checkout) dan bahan UTS (manajemen penyewa) |
-
----
-
-## 1. Deskripsi
-
-Pada P7, checkout sudah membuat record pembayaran awal (DP) sebesar **30%** dari total transaksi di tabel `t_bayar` dengan status `pending`. Namun, pengunggahan bukti transfer dan verifikasi admin belum ada.
+1. Deskripsi
+Pada P7, checkout sudah membuat record pembayaran awal (DP) sebesar 30% dari total transaksi di tabel `t_bayar` dengan status `pending`. Namun, pengunggahan bukti transfer dan verifikasi admin belum ada.
 
 P9 melanjutkan aplikasi yang sama (bukan aplikasi baru) dengan dua fitur:
 
-1. **Penyewa**: melihat rincian DP, lalu mengunggah bukti transfer.
-2. **Admin**: melihat daftar pembayaran, memeriksa bukti transfer, lalu menerima atau menolak pembayaran.
+1. Penyewa: melihat rincian DP, lalu mengunggah bukti transfer.
+2. Admin: melihat daftar pembayaran, memeriksa bukti transfer, lalu menerima atau menolak pembayaran.
 
 Fitur P7 (login, katalog, profil, keranjang, checkout) tetap dipertahankan.
 
----
+ 2. Fitur yang Ditambahkan
 
-## 2. Fitur yang Ditambahkan
-
-### 2.1 Sisi Penyewa
+ 2.1 Sisi Penyewa
 
 - Setelah checkout berhasil, penyewa langsung diarahkan ke halaman pembayaran transaksi tersebut (pola PRG).
-- Menu **Pembayaran** pada navbar penyewa menampilkan daftar pembayaran DP milik penyewa yang login.
+- Menu Pembayaran pada navbar penyewa menampilkan daftar pembayaran DP milik penyewa yang login.
 - Halaman detail menampilkan rincian transaksi, kode pembayaran, nominal DP (30%, diambil dari `t_bayar`), metode pembayaran, dan status pembayaran.
 - Formulir unggah bukti transfer dengan validasi jenis, MIME type, isi gambar, dan ukuran berkas.
-- Bukti disimpan di `uploads/bayar/`, lalu `ft_byr` dan `tgl_wkt_byr` diperbarui. Status tetap `pending`.
+- Bukti disimpan di uploads/bayar, lalu ft_byr dan tgl_wkt_byr diperbarui. Status tetap pending.
 - Umpan balik (_flash message_) berhasil atau gagal ditampilkan kepada penyewa.
 
-### 2.2 Sisi Admin
+ 2.2 Sisi Admin
 
 - Menu baru **Pembayaran** pada sidebar admin.
 - Daftar pembayaran yang menunggu verifikasi (yang sudah ada bukti diurutkan lebih dulu) dan riwayat yang sudah diverifikasi.
@@ -46,7 +28,7 @@ Fitur P7 (login, katalog, profil, keranjang, checkout) tetap dipertahankan.
 - Tombol **Terima** dan **Tolak**.
 - Perubahan status pembayaran dan transaksi dilakukan dalam satu transaksi database.
 
-### 2.3 Ketentuan Perubahan Status
+ 2.3 Ketentuan Perubahan Status
 
 | Keputusan admin     | `t_bayar.sttus_byr` | `t_sewa.status_sewa` | `t_bayar.tgl_wkt_ver`  |
 | ------------------- | ------------------- | -------------------- | ---------------------- |
@@ -69,20 +51,20 @@ Contoh record DP hasil checkout (P7):
 
 ---
 
-## 3. Aturan Bisnis yang Diterapkan
+3. Aturan Bisnis yang Diterapkan
 
 - Penyewa dan admin wajib login. Pengguna yang belum login diarahkan ke halaman autentikasi.
 - Penyewa hanya dapat mengakses pembayaran milik transaksinya sendiri. Query selalu memfilter `user_plg`, dan respons "tidak ada" serta "milik orang lain" disamakan (403) agar tidak membocorkan data.
 - Admin tidak dapat memakai proses unggah penyewa. Penyewa tidak dapat membuka menu verifikasi admin (403).
-- Nominal **tidak pernah** dibaca dari formulir. Nilainya selalu berasal dari database.
+- Nominal tidak pernah dibaca dari formulir. Nilainya selalu berasal dari database.
 - Bukti transfer wajib ada sebelum admin dapat memverifikasi.
-- Pembayaran yang sudah diverifikasi (`valid`/`invalid`) tidak dapat diproses atau diunggah ulang.
-- Penyewa boleh mengunggah ulang bukti selama status masih `pending`. Berkas lama dihapus hanya setelah database berhasil diperbarui.
-- Proses pembayaran memperbarui record DP yang sudah dibuat saat checkout, **bukan** membuat record DP baru.
+- Pembayaran yang sudah diverifikasi (valid/invalid) tidak dapat diproses atau diunggah ulang.
+- Penyewa boleh mengunggah ulang bukti selama status masih pending. Berkas lama dihapus hanya setelah database berhasil diperbarui.
+- Proses pembayaran memperbarui record DP yang sudah dibuat saat checkout, bukan membuat record DP baru.
 
 ---
 
-## 4. Route Baru
+4. Route Baru
 
 Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyyymmdd/nn` (mengandung `/`), sehingga dikirim lewat _query string_, mengikuti pola `transaksi/keranjang?kode_sewa=...`.
 
@@ -97,7 +79,7 @@ Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyy
 
 ---
 
-## 5. Pembagian MVC
+ 5. Pembagian MVC
 
 | Lapisan    | Berkas                                                                                         | Tanggung jawab                                                                                                                                                                                                      |
 | ---------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -127,7 +109,7 @@ Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyy
 
 ---
 
-## 6. Keamanan Unggah Berkas
+ 6. Keamanan Unggah Berkas
 
 Validasi dilakukan berlapis pada `Pembayaran_controller::simpanBerkas()`:
 
@@ -144,15 +126,15 @@ Keamanan lain: _prepared statement_ untuk seluruh query berparameter, pembatasan
 
 ---
 
-## 7. Cara Menjalankan
+ 7. Cara Menjalankan
 
-### Prasyarat
+ Prasyarat
 
 - Laragon (Apache + MySQL) dan PHP 8.4 aktif.
 - Ekstensi PHP `mysqli` dan `fileinfo` aktif.
 - `mod_rewrite` Apache aktif.
 
-### Langkah
+ Langkah
 
 1. Salin folder aplikasi ke `C:\laragon\www\dpwl-2522500033\`.
 2. Buat atau impor database, lalu sesuaikan `application/config/database.php`:
@@ -168,7 +150,7 @@ Keamanan lain: _prepared statement_ untuk seluruh query berparameter, pembatasan
 4. Pastikan folder `uploads/bayar/` ada dan dapat ditulis (dibuat otomatis jika belum ada).
 5. Buka `http://localhost/dpwl-2522500033/`.
 
-### Prasyarat Database
+Prasyarat Database
 
 Kolom berikut harus dapat menyimpan nilai baru P9. Jika berupa `ENUM`, pastikan definisinya memuat nilainya:
 
@@ -179,7 +161,7 @@ Kolom berikut harus dapat menyimpan nilai baru P9. Jika berupa `ENUM`, pastikan 
 
 Model memiliki pengaman: jika nilai hasil verifikasi tidak tersimpan sesuai (misalnya ENUM belum memuat nilai baru), transaksi database dibatalkan (_rollback_).
 
-### Alur Uji Singkat
+ Alur Uji Singkat
 
 1. Login sebagai penyewa → pilih kendaraan → keranjang → **checkout**.
 2. Sistem membuka halaman pembayaran DP → unggah bukti transfer.
@@ -188,7 +170,7 @@ Model memiliki pengaman: jika nilai hasil verifikasi tidak tersimpan sesuai (mis
 
 ---
 
-## 8. Hasil Pengujian Fungsional
+ 8. Hasil Pengujian Fungsional
 
 > Isi kolom **Hasil** (Berhasil / Gagal) dan **Catatan** setelah Anda menjalankan setiap skenario pada aplikasi Anda. Periksa juga konsistensi tabel `t_sewa` dan `t_bayar` setelah setiap proses.
 
@@ -218,7 +200,7 @@ Model memiliki pengaman: jika nilai hasil verifikasi tidak tersimpan sesuai (mis
 
 ---
 
-## 9. Tangkapan Layar
+ 9. Tangkapan Layar
 
 Simpan gambar pada folder `pertemuan-09/screenshots/` lalu sesuaikan tautan di bawah.
 
@@ -232,13 +214,13 @@ Simpan gambar pada folder `pertemuan-09/screenshots/` lalu sesuaikan tautan di b
 
 ---
 
-## 10. Penggunaan AI
+ 10. Penggunaan AI
 
 AI digunakan sebagai alat bantu untuk menganalisis source code P7, merancang Model–View–Controller pembayaran, memeriksa keamanan dan konsistensi proses, serta menyusun skenario pengujian dan README ini. Seluruh kode dibaca, dipahami, diperiksa, dan diuji sendiri pada aplikasi sebelum diterapkan.
 
 ---
 
-## 11. Riwayat Git
+11. Riwayat Git
 
 Pengembangan dicatat bertahap, contoh pesan commit:
 
@@ -251,7 +233,7 @@ Menguji dan memperbaiki proses pembayaran P9
 
 ---
 
-## 12. Kriteria Penyelesaian
+ 12. Kriteria Penyelesaian
 
 - [ ] Fitur P7 tetap berfungsi dengan baik
 - [ ] Penyewa dapat melihat informasi pembayaran DP

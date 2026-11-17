@@ -17,5 +17,13 @@ Semua input dirapikan dengan trim(). Jika ada yang tidak valid, formulir tampil 
 Penanganan kegagalan: jika foto kedua gagal diunggah, foto pertama yang sudah tersimpan dihapus lagi. Jika penyimpanan ke database gagal, foto baru dibuang. Saat foto diganti, foto lama baru dihapus setelah database berhasil diperbarui. Saat penyewa dihapus, kedua fotonya ikut dihapus. Fungsi penghapus hanya menerima nama file berpola buatan sistem, sehingga tidak bisa dipakai menghapus file lain
 5. Pengujian
 fungsi semua berjalan dengan baik.
+6. Dokumentasi
+1. Hasil Pengujian 1
+![Hasil Pengujian 1](dokumentasi/HasilPengujian1.png)
+2. Hasil Pengujiann 2
+![Hasil pengujian 2](dokumentasi/HasilPengujian2.png)
+3. Hasil Pengujian 3
+![Hasil Pengujian 3](dokumentasi/ChekoutBerhasil.png)
+
  
 

@@ -175,3 +175,32 @@ Model memiliki pengaman: jika nilai hasil verifikasi tidak tersimpan sesuai (mis
 4. Periksa `t_bayar` dan `t_sewa` pada database.
 
 ---
+8. Hasil Pengujian Fungsional
+
+> Isi kolom **Hasil** (Berhasil / Gagal) dan **Catatan** setelah Anda menjalankan setiap skenario pada aplikasi Anda. Periksa juga konsistensi tabel `t_sewa` dan `t_bayar` setelah setiap proses.
+
+| No  | Skenario Pengujian                                             | Hasil yang Diharapkan                                | Hasil | Catatan |
+| --- | -------------------------------------------------------------- | ---------------------------------------------------- | ----- | ------- |
+| 1   | Penyewa membuka halaman pembayaran setelah checkout            | Informasi transaksi dan DP ditampilkan               |       |         |
+| 2   | Penyewa membuka pembayaran milik akun lain                     | Akses ditolak                                        |       |         |
+| 3   | Penyewa mengunggah bukti transfer yang valid                   | Berkas tersimpan dan record pembayaran diperbarui    |       |         |
+| 4   | Penyewa mengunggah berkas dengan jenis tidak diizinkan         | Sistem menolak berkas                                |       |         |
+| 5   | Penyewa mengunggah berkas melebihi batas ukuran                | Sistem menolak berkas                                |       |         |
+| 6   | Penyewa mengirim formulir tanpa memilih berkas                 | Sistem menampilkan pesan kesalahan                   |       |         |
+| 7   | Penyewa melihat pembayaran setelah mengunggah bukti            | Status tetap `pending`                               |       |         |
+| 8   | Admin membuka daftar verifikasi                                | Pembayaran `pending` ditampilkan                     |       |         |
+| 9   | Admin melihat bukti transfer                                   | Bukti pembayaran dapat diperiksa                     |       |         |
+| 10  | Admin menerima pembayaran                                      | Status pembayaran `valid` dan transaksi `disetujui`  |       |         |
+| 11  | Admin menolak pembayaran                                       | Status pembayaran `invalid` dan transaksi `ditolak`  |       |         |
+| 12  | Admin mencoba memverifikasi pembayaran tanpa bukti             | Sistem menolak proses                                |       |         |
+| 13  | Admin mencoba memverifikasi pembayaran yang sudah diproses     | Sistem menolak verifikasi berulang                   |       |         |
+| 14  | Penyewa mencoba mengakses menu verifikasi admin                | Akses ditolak                                        |       |         |
+| 15  | Pengguna yang belum login mencoba mengakses halaman pembayaran | Sistem mengarahkan ke autentikasi atau menolak akses |       |         |
+
+### Perbaikan yang Dilakukan Selama Pengujian
+
+| Temuan           | Perbaikan        |
+| ---------------- | ---------------- |
+| _(isi bila ada)_ | _(isi bila ada)_ |
+
+---

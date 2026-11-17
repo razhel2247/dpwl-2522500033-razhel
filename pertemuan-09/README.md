@@ -116,3 +116,19 @@ Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyy
 | `uploads/bayar/`                                    | Folder baru | Dibuat otomatis saat unggah pertama bila belum ada |
 
 ---
+6. Keamanan Unggah Berkas
+
+Validasi dilakukan berlapis pada `Pembayaran_controller::simpanBerkas()`:
+
+1. Pemeriksaan kode error unggahan (`UPLOAD_ERR_*`) dan deteksi `post_max_size` terlampaui.
+2. `is_uploaded_file()` untuk memastikan berkas benar-benar hasil unggahan.
+3. **Ukuran** maksimal **2 MB**.
+4. **Ekstensi** hanya `jpg`, `jpeg`, `png`, `webp`.
+5. **MIME type** nyata via `finfo` (`image/jpeg`, `image/png`, `image/webp`).
+6. Isi berkas diverifikasi sebagai gambar dengan `getimagesize()`.
+7. **Nama berkas dibuat server**: `ft_byr_YYYYMMDDHHMMSS_<16 hex acak>.<ext>`. Nama asli pengguna tidak dipakai, sehingga tidak bentrok dan tidak dapat dimanipulasi.
+8. Penghapusan berkas hanya untuk nama yang cocok pola buatan server (anti _path traversal_).
+
+Keamanan lain: _prepared statement_ untuk seluruh query berparameter, pembatasan method HTTP (405), `htmlspecialchars` pada output view, dan Post-Redirect-Get pada semua pengiriman formulir.
+
+---

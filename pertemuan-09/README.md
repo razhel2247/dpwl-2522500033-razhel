@@ -87,3 +87,32 @@ Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyy
 | POST   | `/admin/pembayaran/verifikasi`           | `Verifikasi_controller::verifikasi` | Admin   |
 
 ---
+5. Pembagian MVC
+
+| Lapisan    | Berkas                                                                                         | Tanggung jawab                                                                                                                                                                                                      |
+| ---------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Model      | `application/models/Pembayaran_model.php`                                                      | Akses dan perubahan data `t_bayar` serta relasinya dengan `t_sewa`, `t_pilih`, `t_mobil`, `t_penyewa`. Semua query memakai _prepared statement_. Verifikasi memakai transaksi database dan `SELECT ... FOR UPDATE`. |
+| View       | `application/views/pembayaran/daftar.php`, `application/views/pembayaran/detail.php`           | Daftar pembayaran penyewa, rincian DP, dan formulir unggah.                                                                                                                                                         |
+| View       | `application/views/admin/verifikasi_view.php`, `application/views/admin/verifikasi_detail.php` | Daftar verifikasi, riwayat, detail, dan bukti transfer.                                                                                                                                                             |
+| Controller | `application/controllers/Pembayaran_controller.php`                                            | Autentikasi penyewa, kepemilikan, validasi berkas, aturan bisnis, PRG.                                                                                                                                              |
+| Controller | `application/controllers/Verifikasi_controller.php`                                            | Autentikasi admin, validasi keputusan, PRG.                                                                                                                                                                         |
+
+### Berkas yang Berubah / Ditambahkan di P9
+
+| Berkas                                              | Status      | Keterangan                                         |
+| --------------------------------------------------- | ----------- | -------------------------------------------------- |
+| `application/controllers/Pembayaran_controller.php` | Baru        | Pembayaran dan unggah bukti oleh penyewa           |
+| `application/controllers/Verifikasi_controller.php` | Baru        | Verifikasi pembayaran oleh admin                   |
+| `application/models/Pembayaran_model.php`           | Baru        | Model pembayaran + `PembayaranException`           |
+| `application/views/pembayaran/daftar.php`           | Baru        | Daftar pembayaran penyewa                          |
+| `application/views/pembayaran/detail.php`           | Baru        | Detail DP dan formulir unggah                      |
+| `application/views/admin/verifikasi_view.php`       | Baru        | Daftar verifikasi admin                            |
+| `application/views/admin/verifikasi_detail.php`     | Baru        | Detail verifikasi admin                            |
+| `application/config/routes.php`                     | Diubah      | Route P9                                           |
+| `application/controllers/Transaksi_controller.php`  | Diubah      | Setelah checkout, redirect ke `pembayaran/detail`  |
+| `application/views/templates/sidebar.php`           | Diubah      | Menu **Pembayaran** admin                          |
+| `application/views/katalog/navbar.php`              | Diubah      | Menu **Pembayaran** penyewa                        |
+| `application/views/transaksi/konfirmasi.php`        | Diubah      | Petunjuk unggah bukti DP                           |
+| `uploads/bayar/`                                    | Folder baru | Dibuat otomatis saat unggah pertama bila belum ada |
+
+---

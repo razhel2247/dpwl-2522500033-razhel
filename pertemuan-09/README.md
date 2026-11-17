@@ -1,25 +1,18 @@
 # pertemuan-09
 
-1. Deskripsi
-   Pada P7, checkout sudah membuat record pembayaran awal (DP) sebesar 30% dari total transaksi di tabel `t_bayar` dengan status `pending`. Namun, pengunggahan bukti transfer dan verifikasi admin belum ada.
-
-P9 melanjutkan aplikasi yang sama (bukan aplikasi baru) dengan dua fitur:
-
-1. Penyewa: melihat rincian DP, lalu mengunggah bukti transfer.
-2. Admin: melihat daftar pembayaran, memeriksa bukti transfer, lalu menerima atau menolak pembayaran.
-
-Fitur P7 (login, katalog, profil, keranjang, checkout) tetap dipertahankan.
-
-2.  Fitur yang Ditambahkan
-
-2.1 Sisi Penyewa
-
-- Setelah checkout berhasil, penyewa langsung diarahkan ke halaman pembayaran transaksi tersebut (pola PRG).
-- Menu Pembayaran pada navbar penyewa menampilkan daftar pembayaran DP milik penyewa yang login.
-- Halaman detail menampilkan rincian transaksi, kode pembayaran, nominal DP (30%, diambil dari `t_bayar`), metode pembayaran, dan status pembayaran.
-- Formulir unggah bukti transfer dengan validasi jenis, MIME type, isi gambar, dan ukuran berkas.
-- Bukti disimpan di uploads/bayar, lalu ft_byr dan tgl_wkt_byr diperbarui. Status tetap pending.
-- Umpan balik (_flash message_) berhasil atau gagal ditampilkan kepada penyewa.
+1. saya membuat halaman pembayaran penyewa agar penyewa dapat mengunggah bukti transfer DP 30% dari transaksi yang sudah di-checkout.
+saya membuat proses unggah bukti yang memperbarui record DP yang sudah dibuat saat checkout P7, bukan membuat record DP baru.
+saya membuat menu verifikasi pembayaran untuk admin berisi daftar, detail, dan tombol terima atau tolak
+saya menambahkan token CSRF, pembatasan akses, dan penyimpanan bukti yang tertutup agar bukti pembayaran tidak bisa dibuka sembarang orang.
+perubahan dan file yang saya buat.
+saya membuat menu daftar pembayaran penyewa dengan membuat application\views\pembayaran\index.php
+saya membuat halaman pembayaran dan form unggah bukti dengan membuat application\views\pembayaran\form.php
+saya membuat proses pembayaran penyewa dengan membuat application\controllers\Pembayaran_controller.php
+saya membuat query pembayaran dan verifikasi dengan membuat application\models\Pembayaran_model.php
+saya membuat halaman verifikasi admin dengan membuat application\controllers\Mpembayaran_controller.php dan application\views\admin\mpembayaran_view.php
+saya membuat token CSRF dengan membuat application\helpers\csrf_helper.php
+menambahkann 6 baris route baru pertemuan-09\application\config\routes.php
+saya menutup akses langsung ke bukti pembayaran dengan membuat uploads\bayar\.htaccess
 
 2.  Fitur yang Ditambahkan
 
@@ -101,7 +94,7 @@ Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyy
 | Controller | `application/controllers/Pembayaran_controller.php`                                            | Autentikasi penyewa, kepemilikan, validasi berkas, aturan bisnis, PRG.                                                                                                                                              |
 | Controller | `application/controllers/Verifikasi_controller.php`                                            | Autentikasi admin, validasi keputusan, PRG.                                                                                                                                                                         |
 
-### Berkas yang Berubah / Ditambahkan di P9
+ Berkas yang Berubah / Ditambahkan di P9
 
 | Berkas                                              | Status      | Keterangan                                         |
 | --------------------------------------------------- | ----------- | -------------------------------------------------- |

@@ -61,3 +61,15 @@ Contoh record DP hasil checkout (P7):
 | `kode_sewa`   | `INV/20261028/01`                |
 
 ---
+3. Aturan Bisnis yang Diterapkan
+
+- Penyewa dan admin wajib login. Pengguna yang belum login diarahkan ke halaman autentikasi.
+- Penyewa hanya dapat mengakses pembayaran milik transaksinya sendiri. Query selalu memfilter `user_plg`, dan respons "tidak ada" serta "milik orang lain" disamakan (403) agar tidak membocorkan data.
+- Admin tidak dapat memakai proses unggah penyewa. Penyewa tidak dapat membuka menu verifikasi admin (403).
+- Nominal tidak pernah dibaca dari formulir. Nilainya selalu berasal dari database.
+- Bukti transfer wajib ada sebelum admin dapat memverifikasi.
+- Pembayaran yang sudah diverifikasi (valid/invalid) tidak dapat diproses atau diunggah ulang.
+- Penyewa boleh mengunggah ulang bukti selama status masih pending. Berkas lama dihapus hanya setelah database berhasil diperbarui.
+- Proses pembayaran memperbarui record DP yang sudah dibuat saat checkout, bukan membuat record DP baru.
+
+---

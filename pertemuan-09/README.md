@@ -1,6 +1,7 @@
 # pertemuan-09
+
 1. Deskripsi
-Pada P7, checkout sudah membuat record pembayaran awal (DP) sebesar 30% dari total transaksi di tabel `t_bayar` dengan status `pending`. Namun, pengunggahan bukti transfer dan verifikasi admin belum ada.
+   Pada P7, checkout sudah membuat record pembayaran awal (DP) sebesar 30% dari total transaksi di tabel `t_bayar` dengan status `pending`. Namun, pengunggahan bukti transfer dan verifikasi admin belum ada.
 
 P9 melanjutkan aplikasi yang sama (bukan aplikasi baru) dengan dua fitur:
 
@@ -9,20 +10,9 @@ P9 melanjutkan aplikasi yang sama (bukan aplikasi baru) dengan dua fitur:
 
 Fitur P7 (login, katalog, profil, keranjang, checkout) tetap dipertahankan.
 
- 2. Fitur yang Ditambahkan
+2.  Fitur yang Ditambahkan
 
- 2.1 Sisi Penyewa
-
-- Setelah checkout berhasil, penyewa langsung diarahkan ke halaman pembayaran transaksi tersebut (pola PRG).
-- Menu Pembayaran pada navbar penyewa menampilkan daftar pembayaran DP milik penyewa yang login.
-- Halaman detail menampilkan rincian transaksi, kode pembayaran, nominal DP (30%, diambil dari `t_bayar`), metode pembayaran, dan status pembayaran.
-- Formulir unggah bukti transfer dengan validasi jenis, MIME type, isi gambar, dan ukuran berkas.
-- Bukti disimpan di uploads/bayar, lalu ft_byr dan tgl_wkt_byr diperbarui. Status tetap pending.
-- Umpan balik (_flash message_) berhasil atau gagal ditampilkan kepada penyewa.
-
- 2. Fitur yang Ditambahkan
-
- 2.1 Sisi Penyewa
+2.1 Sisi Penyewa
 
 - Setelah checkout berhasil, penyewa langsung diarahkan ke halaman pembayaran transaksi tersebut (pola PRG).
 - Menu Pembayaran pada navbar penyewa menampilkan daftar pembayaran DP milik penyewa yang login.
@@ -31,7 +21,18 @@ Fitur P7 (login, katalog, profil, keranjang, checkout) tetap dipertahankan.
 - Bukti disimpan di uploads/bayar, lalu ft_byr dan tgl_wkt_byr diperbarui. Status tetap pending.
 - Umpan balik (_flash message_) berhasil atau gagal ditampilkan kepada penyewa.
 
- 2.2 Sisi Admin
+2.  Fitur yang Ditambahkan
+
+2.1 Sisi Penyewa
+
+- Setelah checkout berhasil, penyewa langsung diarahkan ke halaman pembayaran transaksi tersebut (pola PRG).
+- Menu Pembayaran pada navbar penyewa menampilkan daftar pembayaran DP milik penyewa yang login.
+- Halaman detail menampilkan rincian transaksi, kode pembayaran, nominal DP (30%, diambil dari `t_bayar`), metode pembayaran, dan status pembayaran.
+- Formulir unggah bukti transfer dengan validasi jenis, MIME type, isi gambar, dan ukuran berkas.
+- Bukti disimpan di uploads/bayar, lalu ft_byr dan tgl_wkt_byr diperbarui. Status tetap pending.
+- Umpan balik (_flash message_) berhasil atau gagal ditampilkan kepada penyewa.
+
+  2.2 Sisi Admin
 
 - Menu baru **Pembayaran** pada sidebar admin.
 - Daftar pembayaran yang menunggu verifikasi (yang sudah ada bukti diurutkan lebih dulu) dan riwayat yang sudah diverifikasi.
@@ -39,7 +40,7 @@ Fitur P7 (login, katalog, profil, keranjang, checkout) tetap dipertahankan.
 - Tombol **Terima** dan **Tolak**.
 - Perubahan status pembayaran dan transaksi dilakukan dalam satu transaksi database.
 
- 2.3 Ketentuan Perubahan Status
+  2.3 Ketentuan Perubahan Status
 
 | Keputusan admin     | `t_bayar.sttus_byr` | `t_sewa.status_sewa` | `t_bayar.tgl_wkt_ver`  |
 | ------------------- | ------------------- | -------------------- | ---------------------- |
@@ -61,6 +62,7 @@ Contoh record DP hasil checkout (P7):
 | `kode_sewa`   | `INV/20261028/01`                |
 
 ---
+
 3. Aturan Bisnis yang Diterapkan
 
 - Penyewa dan admin wajib login. Pengguna yang belum login diarahkan ke halaman autentikasi.
@@ -73,6 +75,7 @@ Contoh record DP hasil checkout (P7):
 - Proses pembayaran memperbarui record DP yang sudah dibuat saat checkout, bukan membuat record DP baru.
 
 ---
+
 4. Route Baru
 
 Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyyymmdd/nn` (mengandung `/`), sehingga dikirim lewat _query string_, mengikuti pola `transaksi/keranjang?kode_sewa=...`.
@@ -87,6 +90,7 @@ Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyy
 | POST   | `/admin/pembayaran/verifikasi`           | `Verifikasi_controller::verifikasi` | Admin   |
 
 ---
+
 5. Pembagian MVC
 
 | Lapisan    | Berkas                                                                                         | Tanggung jawab                                                                                                                                                                                                      |
@@ -116,6 +120,7 @@ Ditambahkan pada `application/config/routes.php`. `kode_sewa` berformat `INV/yyy
 | `uploads/bayar/`                                    | Folder baru | Dibuat otomatis saat unggah pertama bila belum ada |
 
 ---
+
 6. Keamanan Unggah Berkas
 
 Validasi dilakukan berlapis pada `Pembayaran_controller::simpanBerkas()`:
@@ -132,15 +137,16 @@ Validasi dilakukan berlapis pada `Pembayaran_controller::simpanBerkas()`:
 Keamanan lain: _prepared statement_ untuk seluruh query berparameter, pembatasan method HTTP (405), `htmlspecialchars` pada output view, dan Post-Redirect-Get pada semua pengiriman formulir.
 
 ---
+
 7. Cara Menjalankan
 
- Prasyarat
+Prasyarat
 
 - Laragon (Apache + MySQL) dan PHP 8.4 aktif.
 - Ekstensi PHP `mysqli` dan `fileinfo` aktif.
 - `mod_rewrite` Apache aktif.
 
- Langkah
+Langkah
 
 1. Salin folder aplikasi ke `C:\laragon\www\dpwl-2522500033\`.
 2. Buat atau impor database, lalu sesuaikan `application/config/database.php`:
@@ -167,7 +173,7 @@ Kolom berikut harus dapat menyimpan nilai baru P9. Jika berupa `ENUM`, pastikan 
 
 Model memiliki pengaman: jika nilai hasil verifikasi tidak tersimpan sesuai (misalnya ENUM belum memuat nilai baru), transaksi database dibatalkan (_rollback_).
 
- Alur Uji Singkat
+Alur Uji Singkat
 
 1. Login sebagai penyewa → pilih kendaraan → keranjang → **checkout**.
 2. Sistem membuka halaman pembayaran DP → unggah bukti transfer.
@@ -175,6 +181,7 @@ Model memiliki pengaman: jika nilai hasil verifikasi tidak tersimpan sesuai (mis
 4. Periksa `t_bayar` dan `t_sewa` pada database.
 
 ---
+
 8. Hasil Pengujian Fungsional
 
 > Isi kolom **Hasil** (Berhasil / Gagal) dan **Catatan** setelah Anda menjalankan setiap skenario pada aplikasi Anda. Periksa juga konsistensi tabel `t_sewa` dan `t_bayar` setelah setiap proses.
@@ -202,5 +209,20 @@ Model memiliki pengaman: jika nilai hasil verifikasi tidak tersimpan sesuai (mis
 | Temuan           | Perbaikan        |
 | ---------------- | ---------------- |
 | _(isi bila ada)_ | _(isi bila ada)_ |
+
+---
+
+9. Tangkapan Layar
+
+1. Hasil Pengujian 1
+   ![Hasil Pengujian 1](dokumentasi/HasilPengujian1.png)
+2. Hasil Pengujiann 2
+   ![Hasil pengujian 2](dokumentasi/HasilPengujian2.png)
+3. Hasil Pengujian 3
+   ![Hasil Pengujian 3](dokumentasi/HasilPengujian3.png)
+4. Hasil Pengujian 4
+   ![Hasil Pengujian 4](dokumentasi/HasilPengujian4.png)
+5. Hasil Pengujian 5
+   ![Hasil Pengujian 5](dokumentasi/HasilPengujian5.png)
 
 ---

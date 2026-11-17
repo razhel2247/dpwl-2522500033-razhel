@@ -24,3 +24,8 @@ saya menutup akses langsung ke bukti pembayaran dengan membuat uploads\bayar\.ht
 * Keamanan & Integritas Data: Nominal pembayaran mutlak diambil dari database (bukan input form), dan proses pembayaran hanya memperbarui record DP yang sudah ada saat checkout (tidak membuat data baru)
 * Kontrol Alur Unggah & Verifikasi: Bukti transfer wajib ada sebelum diverifikasi admin. Selama status masih pending, penyewa boleh mengunggah ulang bukti (file lama dihapus otomatis setelah database terbarukan), namun jika status sudah final (valid/invalid), data terkunci dan tidak bisa diubah lagi
 
+4. Route Baru
+ Bagian ini mendefinisikan enam routing baru di application/config/routes.php yang dipisahkan berdasarkan hak akses pengguna, dengan parameter kode_sewa dikirim melalui query string (karena mengandung karakter garis miring /)
+
+ * Akses Penyewa (Pembayaran_controller): Menyediakan route untuk melihat daftar tagihan (/pembayaran), melihat rincian (/pembayaran/detail), dan mengirim bukti transfer (/pembayaran/unggah)
+ * Akses Admin (Verifikasi_controller): Menyediakan route khusus admin untuk memantau daftar pembayaran masuk (/admin/pembayaran), memeriksa rincian bukti (/admin/pembayaran/detail), dan memproses keputusan verifikasi (/admin/pembayaran/verifikasi)

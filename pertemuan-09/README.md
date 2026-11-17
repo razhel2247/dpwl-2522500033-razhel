@@ -34,3 +34,8 @@ saya menutup akses langsung ke bukti pembayaran dengan membuat uploads\bayar\.ht
  * Model (Pembayaran_model.php): Mengelola query data pembayaran dan relasinya menggunakan prepared statement, serta menjaga integritas proses verifikasi lewat transaksi database dan SELECT ... FOR UPDATE
  * Controller (Pembayaran_controller & Verifikasi_controller): Memisahkan alur logika bisnis penyewa (validasi unggahan, cek kepemilikan, pola PRG) dengan alur admin (autentikasi admin dan eksekusi keputusan verifikasi)
  * View & Integrasi Berkas: Menambahkan 4 halaman tampilan baru (daftar dan detail untuk masing-masing peran), memperbarui berkas navigasi (navbar.php, sidebar.php), rute (routes.php), alur redirect setelah checkout (Transaksi_controller.php), serta menyiapkan direktori penyimpanan uploads/bayar/.
+
+ 6. Hasil Pengujian Fungsional
+ * Alur Penyewa Menguji tampilan rincian DP setelah checkout, unggah bukti transfer yang valid (status tetap pending), serta penolakan otomatis terhadap unggahan yang kosong, melebihi batas ukuran, atau berformat tidak sah
+ * Alur Admin Memastikan daftar pembayaran masuk dan bukti transfer dapat diperiksa, perubahan status pada tabel t_bayar dan t_sewa akurat saat diterima atau ditolak, serta mencegah verifikasi tanpa bukti maupun verifikasi ulang 
+ * Keamanan Hak Akses & Log Perbaikan Menguji pemblokiran pengguna yang belum login, pencegahan akses lintas akun penyewa, pembatasan menu admin, serta menyediakan tabel pencatatan temuan dan perbaikan selama pengujian

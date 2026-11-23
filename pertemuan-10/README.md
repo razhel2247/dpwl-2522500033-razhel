@@ -28,3 +28,9 @@ Penambahan route daftar pelunasan.
 * Penambahan route dokumen transaksi.
 * Integrasi menu Pelunasan pada sidebar admin.
 * Hasil pemeriksaan route dan navigasi
+5. Membuat View Daftar dan Detail Pelunasan
+* Membuat application\views\admin\pelunasan.php
+menampilkan daftar transaksi yang masih memiliki kewajiban pembayaran
+* Membuat   application\views\admin\pelunasan_detail.php
+untuk menampilkan detail transaksi yang akan dilunasi. Gunakan data detailPelunasan yang
+dikirimkan

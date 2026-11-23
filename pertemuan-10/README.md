@@ -34,3 +34,6 @@ menampilkan daftar transaksi yang masih memiliki kewajiban pembayaran
 * Membuat   application\views\admin\pelunasan_detail.php
 untuk menampilkan detail transaksi yang akan dilunasi. Gunakan data detailPelunasan yang
 dikirimkan
+6. Membuat Dokumen Transaksi
+* menampilkan ringkasan penyewaan dan riwayat pembayaran berdasarkan
+data yang tersimpan pada basis data

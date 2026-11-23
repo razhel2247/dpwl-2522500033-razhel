@@ -21,4 +21,10 @@ langsung oleh admin
 * Menampilkan Dokumen Transaksi
 menambhkan Method dokumenTransaksi(string $kodeSewa) digunakan untuk menampilkan dokumen transaksi yang siap
 dicetak
-
+4. Menambahkan kode codingan Route Pelunasan
+Penambahan route daftar pelunasan.
+* Penambahan route detail pelunasan.
+* Penambahan route proses pelunasan.
+* Penambahan route dokumen transaksi.
+* Integrasi menu Pelunasan pada sidebar admin.
+* Hasil pemeriksaan route dan navigasi

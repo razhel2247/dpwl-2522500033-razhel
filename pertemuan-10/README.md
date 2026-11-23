@@ -8,3 +8,17 @@
 Tambahkan method simpanPelunasan(string $kodeSewa, string $metodeBayar, ?string $namaFileBukti =
 null)
 * melakukan pemeriksaan awal terhadap Model Pelunasan
+3. Implementasi Controller Pelunasan
+* Menampilkan Daftar Transaksi yang Belum Lunas
+Menambhkan method pelunasanIndex() digunakan untuk menampilkan daftar transaksi yang masih memiliki kewajiban
+pelunasan
+* Menampilkan Detail Pelunasan
+menambhkan Method pelunasanDetail(string $kodeSewa) digunakan untuk menampilkan detail transaksi, riwayat
+pembayaran, dan sisa kewajiban.
+* Memproses Pelunasan
+menambkan Method prosesPelunasan(string $kodeSewa) digunakan untuk mencatat pembayaran pelunasan yang diterima
+langsung oleh admin
+* Menampilkan Dokumen Transaksi
+menambhkan Method dokumenTransaksi(string $kodeSewa) digunakan untuk menampilkan dokumen transaksi yang siap
+dicetak
+

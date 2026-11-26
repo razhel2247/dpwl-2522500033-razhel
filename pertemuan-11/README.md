@@ -12,3 +12,14 @@ Fitur transaksi dan pembayaran P10 telah diperiksa melalui aplikasi. Hasil pemer
 - semua fitur pada P10 berhasil diuji.
 - Tidak ada kendala yang ditemukan.
 - Tidak ada perbaikan yang dilakukan.
+B. Analisis Persyaratan Serah Terima Kendaraan
+P11 mengembangkan proses serah terima kendaraan setelah transaksi disetujui dan pembayaran DP
+diverifikasi valid. Sebelum penyerahan dikonfirmasi, admin harus memastikan data penyewa, dokumen
+KTP dan SIM A, serta detail kendaraan tersedia.
+Proses serah terima menggunakan tabel `t_sewa`, `t_bayar`, `t_penyewa`, `t_pilih`, dan `t_mobil`.
+Sistem mencatat waktu aktual penyerahan pada `t_sewa.wkt_ambil` dan mengubah `t_sewa.status_sewa`
+menjadi `aktif`. Status kendaraan tetap `disewa` dan tidak dibuat pembayaran baru.
+Implementasi direncanakan menggunakan pemisahan tanggung jawab MVC: Model mengelola pengambilan dan
+penyimpanan data, Controller menangani alur permintaan dan validasi proses, sedangkan View
+menyajikan informasi serta formulir serah terima.
+Analisis ini menjadi dasar implementasi pada bagian C sampai dengan F.git
